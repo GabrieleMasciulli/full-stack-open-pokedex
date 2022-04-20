@@ -13,11 +13,13 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - uses: akhileshns/heroku-deploy@v3.12.12 # heroku-deployment action
+      - name: heroku-deploy
+        uses: akhileshns/heroku-deploy@v3.12.12 # heroku-deployment action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ci-pokemon-app
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: https://ci-pokemon-app.herokuapp.com//health
 
       - name: npm install
         run: npm install
