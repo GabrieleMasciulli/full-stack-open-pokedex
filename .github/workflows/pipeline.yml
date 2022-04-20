@@ -13,6 +13,17 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
+      - uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e # specifies how to run Cypress tests
+          start: npm run start-prod # gives npm script that starts the server
+          wait-on: http://localhost:5000 # says that the server should have started at the speficied url before the tests are run
+      - uses: akhileshns/heroku-deploy@v3.12.12 # heroku-deployment action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ci-pokemon-app
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+
       - name: npm install
         run: npm install
       - name: lint
@@ -22,8 +33,4 @@ jobs:
       - name: test
         run: npm run test
       - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e # specifies how to run Cypress tests
-          start: npm run start-prod # gives npm script that starts the server
-          wait-on: http://localhost:5000 # says that the server should have started at the speficied url before the tests are run
+      
