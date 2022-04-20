@@ -1,1 +1,1 @@
-web: npm run start-ppprodddd
+web: npm run start-prod
