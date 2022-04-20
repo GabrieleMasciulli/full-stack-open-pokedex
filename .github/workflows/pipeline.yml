@@ -19,7 +19,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ci-pokemon-app
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: https://ci-pokemon-app.herokuapp.com//health
+          healthcheck: https://ci-pokemon-app.herokuapp.com/health
           checkstring: ok
 
       - name: npm install
