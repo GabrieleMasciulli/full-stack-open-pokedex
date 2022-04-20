@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: '16'
       - name: heroku-deploy
+        if: ${{ github.event_name == 'push' }} # making sure the deployment step isn't executed on pull requests but just when code is merged to the master branch 
         uses: akhileshns/heroku-deploy@v3.12.12 # heroku-deployment action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
