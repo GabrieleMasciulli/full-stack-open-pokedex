@@ -25,5 +25,5 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: skipping step if message has '#skip'
         if: ${{ env.SHOULD_SKIP_TAG_RELEASE }}
-        run: echo "this shouldn't be printed if commit's message has '#skip' inside."
+        run: echo "this shouldn't be printed if commit's message has '#skip' inside." #
 
