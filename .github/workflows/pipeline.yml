@@ -47,12 +47,13 @@ jobs:
     needs: [simple_deployment_pipeline] # tags the release if it passes the tests and is deployed
     runs-on: ubuntu-20.04
     steps: 
-      - uses: actions/checkout@v3 # current branch
+      - uses: actions/checkout@v3
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }} # only on merge
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+          INITIAL_VERSION: v0.0.0
           WITH_V: true
           DRY_RUN: true
