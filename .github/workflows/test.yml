@@ -4,7 +4,7 @@ env:
   GITHUB_CONTEXT: ${{ toJSON(github) }}
   COMMITS: ${{ toJSON(github.event.commits) }}
   COMMIT_MESSAGES: ${{ toJSON(github.event.commits.*.message) }}
-  JOINED_MESSAGES: ${{ join(${{ env.COMMIT_MESSAGES }}) }}
+  JOINED_MESSAGES: ${{ join(env.COMMIT_MESSAGES) }}
   SHOULD_SKIP_TAG_RELEASE: ${{ contains(env.JOINED_MESSAGES , \#skip) }}
 
 
