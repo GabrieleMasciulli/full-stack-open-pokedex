@@ -1,5 +1,11 @@
 name: Testing workflow
 
+env:
+  GITHUB_CONTEXT: ${ toJson(github )}
+  COMMITS: ${ toJson(github.event.commits) }
+  COMMIT_MESSAGES: ${ toJson(github.event.commits.*.message) }
+
+
 on:
   push:
     branches:
@@ -11,14 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
       - name: github commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
       - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      #- name: skipping step if message has '#skip'
+      #  run: echo "this shouldn't be printed if commit's message has '#skip' inside."
+
