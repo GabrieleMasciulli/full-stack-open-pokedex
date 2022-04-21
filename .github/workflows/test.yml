@@ -1,9 +1,9 @@
 name: Testing workflow
 
 env:
-  GITHUB_CONTEXT: ${ toJson(github )}
-  COMMITS: ${ toJson(github.event.commits) }
-  COMMIT_MESSAGES: ${ toJson(github.event.commits.*.message) }
+  GITHUB_CONTEXT: ${ { toJson(github) } }
+  COMMITS: ${ { toJson(github.event.commits) } }
+  COMMIT_MESSAGES: ${ { toJson(github.event.commits.*.message) } }
 
 
 on:
