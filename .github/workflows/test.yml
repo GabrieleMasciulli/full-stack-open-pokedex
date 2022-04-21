@@ -4,8 +4,7 @@ env:
   GITHUB_CONTEXT: ${{ toJSON(github) }}
   COMMITS: ${{ toJSON(github.event.commits) }}
   COMMIT_MESSAGES: ${{ toJSON(github.event.commits.*.message) }}
-  JOINED_MESSAGES: ${{ join(env.COMMIT_MESSAGES) }}
-  SHOULD_SKIP_TAG_RELEASE: ${{ contains(env.JOINED_MESSAGES , \#skip) }}
+  SHOULD_SKIP_TAG_RELEASE: ${{ contains(join(toJSON(github.event.commits.*.message)), "#skip") }}
 
 
 on:
@@ -25,6 +24,6 @@ jobs:
       - name: commit messages
         run: echo "$COMMIT_MESSAGES"
       - name: skipping step if message has '#skip'
-        if: ${{ SHOULD_SKIP_TAG_RELEASE }}
+        if: ${{ env.SHOULD_SKIP_TAG_RELEASE }}
         run: echo "this shouldn't be printed if commit's message has '#skip' inside."
 
